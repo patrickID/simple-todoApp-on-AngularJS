@@ -1,0 +1,22 @@
+<table class="table table-hover">
+    <tr>
+        <th>Task</th>
+        <th>Tags</th>
+        <th>Actual effort</th>
+        <th>Estimated effort</th>
+        <th>Due date</th>
+    </tr>
+    <tr ng-repeat="task in tasks | filter:{obj_status: 'active'}:true">
+        <td class="high_priority_{{task.is_high_priority}}">
+            <a href="#/tasks/{{task.id}}">{{task.name}}</a>
+        </td>
+        <td>
+            <ul>
+                <li ng-repeat="tag in task.tags">{{tag}}</li>
+            </ul>
+        </td>
+        <td>{{task.actual_effort}}</td>
+        <td>{{task.estimated_effort}}</td>
+        <td>{{task.due_date | date:'yyyy-MM-dd'}}</td>
+    </tr>
+</table>
