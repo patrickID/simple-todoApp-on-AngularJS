@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('todoControllers', ['ngRoute'])
+angular.module('todoControllers', [])
 
 .controller('listCtrl', function($scope, $http) {
     $http.get("res/tasks.json").success(function(response) {
@@ -14,11 +14,12 @@ angular.module('todoControllers', ['ngRoute'])
                                    var currentTask = response.filter( function(task) {
                                        return task.id ==  $routeParams.id;
                                    })[0];
-                                   if (currentTask.description) {
-                                       currentTask.description = currentTask.description.replace(/_/g, ' ');
+                                   if (currentTask) {
+                                       if (currentTask.description) currentTask.description = currentTask.description.replace(/_/g, ' ');
+                                       $scope.currentTask = currentTask;
                                    }
-                                   $scope.currentTask = currentTask;
-                                }) 
-                           }
+                                   else location.href='';
+                                })
+                               }
                           ]);
 

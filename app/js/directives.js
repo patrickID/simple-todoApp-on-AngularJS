@@ -18,10 +18,10 @@ angular.module( 'todoDirectives', [] )
         scope.value = val;
       });
 
-      /* enable inline editing functionality */
+    /* enable inline editing functionality */
       var enablingEditing = function () {
         scope.edit = true;
-
+        scope.original = scope.value;
         setTimeout(function () {
           element.children().children('input')[0].focus();
           element.children().children('input').bind('blur', function (e) {
@@ -37,8 +37,8 @@ angular.module( 'todoDirectives', [] )
       var disablingEditing = function () {
         scope.edit = false;
         scope.inline = scope.value;
-        console.log(scope.inline);
-        if (scope.inline){
+
+        if (scope.inline && scope.inline != scope.original){
             $http.put("todoApp.php", scope.inline).success(function (data, status, headers, config) {  })
         }
       };
@@ -50,7 +50,6 @@ angular.module( 'todoDirectives', [] )
 
       /* when the element with the inline attribute is clicked, enable editing */
       element.bind('click', function (e) {
-
         if ((e.target.nodeName.toLowerCase() === 'span') || (e.target.nodeName.toLowerCase() === 'img')) {
           scope.$apply(function () { // bind to scope
             enablingEditing();

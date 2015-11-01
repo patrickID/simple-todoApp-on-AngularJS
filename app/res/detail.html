@@ -7,12 +7,19 @@
             
             <dt>Due date</dt>
             <dd>{{currentTask.due_date | date:'yyyy-MM-dd'}}</dd>
-            
-            <dt>Progress</dt>
-            <dd>{{currentTask.physical_progress}}</dd>
-            
+
             <dt>Description</dt>
             <dd>{{currentTask.description}}</dd>
+
+            <dt>Progress</dt>
+            <dd>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="{{currentTask.physical_progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{currentTask.physical_progress}}%;">
+                        {{currentTask.physical_progress}}%
+                    </div>
+                </div>
+            </dd>
+
         </dl>           
     </p>
     <p>
